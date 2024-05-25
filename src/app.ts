@@ -1,16 +1,15 @@
 import express from "express";
 import config from "config";
+import admRoutes from "./routes/admRoutes"
 
 const app = express();
 
 app.use(express.json());
 
-import router from "./router";
-
-app.use("/api/", router);
+app.use("/api/", admRoutes);
 
 const port = config.get<number>("port")
 
-app.listen(3000, async () => {
-    console.log(`rodando na porta: ${port}`)
+app.listen(port, async () => {
+    console.log(`Server running on the port: ${port}`)
 });
