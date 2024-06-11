@@ -1,22 +1,13 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
     "target": "es2016",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-
-    /* Modules */
-    "rootDir": "./src",                    
-    "outDir": "./dist",                    
-    "moduleResolution": "node",            
-    "resolveJsonModule": true,             
-
-    /* Emit */
-    "declaration": true,                   
-    "sourceMap": true                      
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist"
   },
-  "include": ["src"]                        
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

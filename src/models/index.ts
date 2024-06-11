@@ -1,19 +1,29 @@
 import fs from 'fs';
 import path from 'path';
 import { Sequelize, DataTypes } from 'sequelize';
-import { EnvConfig } from '../database/config';
-import process from 'process';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config: EnvConfig = require(__dirname + '/../database/config')[env];
+const configPath = path.join(__dirname, '/../database/config.ts');
+const config = require(configPath)[env];
 const db: any = {};
 
 let sequelize: Sequelize;
 if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable] as string, config);
 } else {
-    sequelize = new Sequelize(config.database, config.username, config.password, config);
+    sequelize = new Sequelize(
+        config.database,
+        config.username,
+        config.password || '',
+        {
+            host: config.host,
+            dialect: config.dialect,
+            port: config.port,
+        }
+    );
 }
 
 fs
